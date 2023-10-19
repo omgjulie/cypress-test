@@ -12,10 +12,16 @@ describe("Dialog page", () => {
     cy.get("@modalTitle").should("have.text", "Enter your name");
 
     cy.get("nb-dialog-container nb-card-body input").as("modalInput");
-    cy.get("@modalInput").should("exist");
+    cy.get("@modalInput").should("be.visible");
 
     cy.get("nb-dialog-container nb-card-footer button").as("modalButton");
-    cy.get("@modalButton").first().should("exist").and("have.text", "Cancel");
-    cy.get("@modalButton").last().should("exist").and("have.text", "Submit");
+    cy.get("@modalButton")
+      .first()
+      .should("be.visible")
+      .and("have.text", "Cancel");
+    cy.get("@modalButton")
+      .last()
+      .should("be.visible")
+      .and("have.text", "Submit");
   });
 });
