@@ -1,6 +1,6 @@
 import { BasePage } from "../BasePage";
 
-export class SmartTable extends BasePage {
+export class SmartTablePage extends BasePage {
   _addButtonSelector = "table thead tr:nth-child(2) a";
   _idInputSelector = "table thead tr:nth-child(3) td:nth-child(2) input";
   _firstNameInputSelector = "table thead tr:nth-child(3) td:nth-child(3) input";
@@ -27,6 +27,13 @@ export class SmartTable extends BasePage {
   _ageFilledInputSelector = "table tbody tr:first-child td:nth-child(7) input";
   _saveButtonSelector =
     "table tbody tr:first-child td:nth-child(1) a.ng2-smart-action-edit-save";
+
+  _idCellSelector = "table tbody tr:first-child td:nth-child(2)";
+  _firstNameCellSelector = "table tbody tr:first-child td:nth-child(3)";
+  _lastNameCellSelector = "table tbody tr:first-child td:nth-child(4)";
+  _usernameCellSelector = "table tbody tr:first-child td:nth-child(5)";
+  _emailCellSelector = "table tbody tr:first-child td:nth-child(6)";
+  _ageCellSelector = "table tbody tr:first-child td:nth-child(7)";
 
   constructor() {
     super("pages/tables/smart-table");
@@ -77,5 +84,14 @@ export class SmartTable extends BasePage {
       delay: 50,
     });
     cy.get(this._saveButtonSelector).click();
+  }
+
+  checkDataValidation(id, firstName, lastName, username, email, age) {
+    cy.get(this._idCellSelector).should("contain", id);
+    cy.get(this._firstNameCellSelector).should("contain", firstName);
+    cy.get(this._lastNameCellSelector).should("contain", lastName);
+    cy.get(this._usernameCellSelector).should("contain", username);
+    cy.get(this._emailCellSelector).should("contain", email);
+    cy.get(this._ageCellSelector).should("contain", age);
   }
 }

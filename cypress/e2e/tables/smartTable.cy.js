@@ -1,8 +1,8 @@
-import { SmartTable } from "../../pageObjects/tables/SmartTable";
+import { SmartTablePage } from "../../pageObjects/tables/SmartTablePage";
 
 describe("Table of users", () => {
   it("should create and edit user", () => {
-    const user = new SmartTable();
+    const smartTablePage = new SmartTablePage();
 
     const userData = {
       id: 8,
@@ -22,8 +22,8 @@ describe("Table of users", () => {
       age: 25,
     };
 
-    user.navigate();
-    user.createNewUser(
+    smartTablePage.navigate();
+    smartTablePage.createNewUser(
       userData.id,
       userData.firstName,
       userData.lastName,
@@ -32,32 +32,16 @@ describe("Table of users", () => {
       userData.age,
     );
 
-    cy.get("table tbody tr:first-child td:nth-child(2)").should(
-      "contain",
+    smartTablePage.checkDataValidation(
       userData.id,
-    );
-    cy.get("table tbody tr:first-child td:nth-child(3)").should(
-      "contain",
       userData.firstName,
-    );
-    cy.get("table tbody tr:first-child td:nth-child(4)").should(
-      "contain",
       userData.lastName,
-    );
-    cy.get("table tbody tr:first-child td:nth-child(5)").should(
-      "contain",
       userData.username,
-    );
-    cy.get("table tbody tr:first-child td:nth-child(6)").should(
-      "contain",
       userData.email,
-    );
-    cy.get("table tbody tr:first-child td:nth-child(7)").should(
-      "contain",
       userData.age,
     );
 
-    user.editUser(
+    smartTablePage.editUser(
       updatedUserData.id,
       updatedUserData.firstName,
       updatedUserData.lastName,
@@ -66,28 +50,12 @@ describe("Table of users", () => {
       updatedUserData.age,
     );
 
-    cy.get("table tbody tr:first-child td:nth-child(2)").should(
-      "contain",
+    smartTablePage.checkDataValidation(
       updatedUserData.id,
-    );
-    cy.get("table tbody tr:first-child td:nth-child(3)").should(
-      "contain",
       updatedUserData.firstName,
-    );
-    cy.get("table tbody tr:first-child td:nth-child(4)").should(
-      "contain",
       updatedUserData.lastName,
-    );
-    cy.get("table tbody tr:first-child td:nth-child(5)").should(
-      "contain",
       updatedUserData.username,
-    );
-    cy.get("table tbody tr:first-child td:nth-child(6)").should(
-      "contain",
       updatedUserData.email,
-    );
-    cy.get("table tbody tr:first-child td:nth-child(7)").should(
-      "contain",
       updatedUserData.age,
     );
   });
