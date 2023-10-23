@@ -1,4 +1,4 @@
-/// <reference types="cypress" />
+// / <reference types="cypress" />
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
@@ -35,3 +35,17 @@
 //     }
 //   }
 // }
+
+/* tslint:disable */
+
+Cypress.Commands.add("login", function (email, password, rememberMeCheckbox) {
+  cy.get("form input#input-email").type(email, { delay: 70 });
+
+  cy.get("form input#input-password").type(password, { delay: 70 });
+
+  if (rememberMeCheckbox) {
+    cy.get("form .custom-checkbox").click();
+  }
+
+  cy.get("form button[status='primary']").click();
+});
